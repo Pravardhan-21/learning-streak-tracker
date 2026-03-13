@@ -1,36 +1,217 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Daily Learning Streak Tracker
 
-## Getting Started
+A simple full-stack web application that helps students maintain a **daily learning habit** by tracking their study streak.
 
-First, run the development server:
+This project was built as part of the **KALNET Full Stack Development Task** using **Next.js, TypeScript, Tailwind CSS, and API Routes**.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+---
+
+## Project Overview
+
+Students often struggle to maintain consistency while studying.
+This application allows a student to:
+
+* Mark that they **studied today**
+* Track their **current learning streak**
+* See **total days studied**
+* View **last study date**
+* Access a **history of study dates**
+
+The goal is to demonstrate **basic full-stack development skills** including frontend, backend APIs, and deployment.
+
+---
+
+## Tech Stack
+
+The project is built using the following technologies:
+
+* **Next.js (App Router)**
+* **TypeScript**
+* **Tailwind CSS**
+* **Next.js API Routes**
+* **In-memory storage (for simplicity)**
+* **Vercel deployment**
+
+---
+
+## Features
+
+### 1. Dashboard
+
+Displays:
+
+* Current streak
+* Total study days
+* Last study date
+* Button to mark **"I Studied Today"**
+
+---
+
+### 2️. Study Button
+
+When the user clicks **I Studied Today**:
+
+* The system records today's date
+* Prevents duplicate entries
+* Updates the study streak
+
+Example message:
+
+```
+You have already marked today.
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### 3️. Streak Logic
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+The streak follows these rules:
 
-## Learn More
+If a student studies on consecutive days, the streak increases.
 
-To learn more about Next.js, take a look at the following resources:
+Example:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+10 March → Studied
+11 March → Studied
+12 March → Studied
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Current Streak = 3
+```
 
-## Deploy on Vercel
+If a day is missed:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+13 March → Missed
+14 March → Studied
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Streak resets to = 1
+```
+
+---
+
+### 4️. Study History
+
+The **History page** shows all study dates.
+
+Example:
+
+```
+14 March 2026
+12 March 2026
+11 March 2026
+10 March 2026
+```
+
+Newest entries appear first.
+
+---
+
+##  API Endpoints
+
+### POST `/api/study`
+
+Marks today's study.
+
+Response:
+
+```
+{
+  success: true,
+  message: "Study recorded successfully"
+}
+```
+
+---
+
+### GET `/api/streak`
+
+Returns:
+
+```
+{
+  currentStreak: number,
+  totalDays: number,
+  lastStudyDate: string
+}
+```
+
+---
+
+### GET `/api/history`
+
+Returns a list of study dates.
+
+```
+[
+  "2026-03-14",
+  "2026-03-12",
+  "2026-03-11"
+]
+```
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️. Clone the repository
+
+```
+git clone https://github.com/your-username/learning-streak-tracker.git
+```
+
+### 2️. Navigate to the project folder
+
+```
+cd learning-streak-tracker
+```
+
+### 3️. Install dependencies
+
+```
+npm install
+```
+
+### 4️. Run the development server
+
+```
+npm run dev
+```
+
+### 5️. Open in browser
+
+```
+http://localhost:3000
+```
+
+---
+
+##  Deployment
+
+This project is deployed using **Vercel**.
+
+Steps:
+
+1. Push code to **GitHub**
+2. Connect the repository to **Vercel**
+3. Deploy the project
+
+Example deployment link:
+
+```
+https://learning-streak-tracker.vercel.app
+```
+
+---
+
+##  Future Improvements
+
+Possible enhancements:
+
+* User authentication
+* Persistent database (SQLite / Prisma)
+* Multiple users
+* Calendar view for study tracking
+* Progress analytics
+
+---
